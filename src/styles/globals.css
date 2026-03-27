@@ -535,3 +535,11 @@ h5 {
   box-shadow: var(--shadow-md);
   transform: translateY(-3px);
 }
+
+.bg-navy-dark {
+  background: #0a1628;
+}
+
+.text-navy-dark {
+  color: #0a1628;
+}

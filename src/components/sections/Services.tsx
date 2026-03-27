@@ -2,107 +2,16 @@
 
 import { useState } from 'react';
 
-interface Service {
-  id: string;
-  title: string;
-  tag: string;
-  img: string;
-  body: string[];
-  bullets: string[];
-}
+import Link from 'next/link';
+import { services, tagColors, type Service } from '@/data/services';
 
-const services: Service[] = [
-  {
-    id: 'alta',
-    title: 'ALTA Surveys',
-    tag: 'Commercial',
-    img: 'https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'ALTA Surveys are primarily conducted for commercial properties and are typically required by lenders and law firms. Established by the American Land Title Association, they are the gold standard in commercial surveying.',
-      'These surveys identify or establish all property boundary corners and locate all above-ground improvements both on the subject property and within five feet of its boundaries.',
-      'ALTA Surveys also include a review of the Schedule B-II section of the title commitment, documenting relevant survey-related matters.',
-      'Clients may request additional items from Table A — a list of optional requirements outlined in the Minimum Standard Detail Requirements for ALTA/ACSM Land Title Surveys.',
-    ],
-    bullets: [],
-  },
-  {
-    id: 'boundary',
-    title: 'Boundary Surveys',
-    tag: 'Residential',
-    img: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'Also referred to as a Mortgage or Loan Survey, this is the most common type of survey required by lenders during the financing process.',
-      'A Boundary Survey involves determining and marking property corners, locating visible fixed improvements within the property, and identifying potential issues — such as encroachments — that could impact loan approval.',
-      'Boundary Surveys may also be conducted to resolve specific boundary questions, evaluate the location of improvements in relation to a particular property line, or divide a single parcel into multiple parcels.',
-    ],
-    bullets: [],
-  },
-  {
-    id: 'asbuilt',
-    title: 'As-Built Surveys',
-    tag: 'Construction',
-    img: 'https://images.unsplash.com/photo-1503708928676-1cb796a0891e?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'Also referred to as a Record Survey, an As-Built Survey is typically performed during the final phase of construction.',
-      'It documents the horizontal and vertical positions of newly constructed features as they were actually built, allowing for comparison with the original construction plans.',
-      'This verification confirms that all improvements conform to the intended design specifications — providing essential documentation for project closeout and regulatory compliance.',
-    ],
-    bullets: [],
-  },
-  {
-    id: 'construction',
-    title: 'Construction Layout',
-    tag: 'All Projects',
-    img: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'Clearview provides a comprehensive range of construction layout services tailored to meet project requirements.',
-      'For non-commercial projects, services typically include staking proposed structures with horizontal and vertical control points to guide construction.',
-      'For commercial projects, construction layout services are more extensive, offering precise reference points to support a variety of site development needs.',
-    ],
-    bullets: [
-      'Stakeout with cut and fill elevations for roadways',
-      'Sewer and storm system layout',
-      'Building and structure placement',
-      'Retention pond staking and grading control',
-    ],
-  },
-  {
-    id: 'elevation',
-    title: 'Elevation Certificates',
-    tag: 'FEMA / Flood',
-    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'Elevation Certificates are required by lenders when a property is located within a Flood Hazard Area designated by FEMA, and flood insurance is required.',
-      "These certificates document the property's elevations in relation to the Base Flood Elevation (BFE) established by FEMA or local authorities.",
-      'The flood insurance premium is determined based on how property elevations compare to the BFE — an accurate certificate can mean significant savings on annual premiums.',
-    ],
-    bullets: [],
-  },
-  {
-    id: 'topo',
-    title: 'Topographic Survey',
-    tag: 'Site Planning',
-    img: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=600&h=350&q=80',
-    body: [
-      'A Topographic Survey maps both natural and man-made features to show their horizontal and vertical relationships.',
-      'These surveys are commonly used when designing proposed improvements on a property or when modifying drainage patterns.',
-      'Typically, a Topographic Survey extends beyond the property boundaries to provide a more complete understanding of how surrounding areas may affect drainage and site development.',
-      'Results are delivered in digital format (CAD/PDF) suitable for engineers, architects, and site planners.',
-    ],
-    bullets: [],
-  },
-];
-
-const tagColors: Record<string, { bg: string; border: string; text: string }> = {
-  Commercial: { bg: 'rgba(0,79,128,0.70)', border: 'rgba(0,170,238)', text: '#fff' },
-  Residential: { bg: 'rgba(16,185,129,0.70)', border: 'rgba(16,185,129)', text: '#000' },
-  Construction: { bg: 'rgba(59,130,246,0.70)', border: 'rgba(59,130,246)', text: '#fff' },
-  'All Projects': { bg: 'rgba(0,79,128,0.70)', border: 'rgba(0,170,238)', text: '#fff' },
-  'FEMA / Flood': { bg: 'rgba(249,115,22,0.70)', border: 'rgba(249,115,22)', text: '#fff' },
-  'Site Planning': { bg: 'rgba(20,184,166,0.70)', border: 'rgba(20,184,166)', text: '#fff' },
-};
-
-export default function Services() {
+export default function Services({
+  hideHeader = false,
+  variant = 'grid'
+}: {
+  hideHeader?: boolean;
+  variant?: 'grid' | 'page';
+}) {
   const [activeModal, setActiveModal] = useState<string | null>(null);
   const selectedService = activeModal ? services.find((s) => s.id === activeModal) : null;
 
@@ -111,58 +20,126 @@ export default function Services() {
       <section
         id="services"
         style={{
-          background: 'linear-gradient(180deg,#eaf4ff 0%,#f5faff 100%)',
-          padding: '6rem 0',
+          background: variant === 'page' ? '#ffffff' : 'linear-gradient(180deg,#eaf4ff 0%,#f5faff 100%)',
+          padding: hideHeader ? '3rem 0 6rem' : '6rem 0',
           position: 'relative',
           overflow: 'hidden',
         }}
       >
         {/* Decorative SVG */}
-        <svg
-          className="absolute right-0 top-0 opacity-[0.04] pointer-events-none"
-          width="400"
-          height="400"
-          viewBox="0 0 400 400"
-          fill="none"
-        >
-          <circle cx="200" cy="200" r="160" stroke="#004f80" strokeWidth="1" />
-          <circle cx="200" cy="200" r="100" stroke="#004f80" strokeWidth="1" />
-          <circle cx="200" cy="200" r="40" stroke="#004f80" strokeWidth="1" />
-          <line x1="200" y1="0" x2="200" y2="400" stroke="#004f80" strokeWidth="0.8" />
-          <line x1="0" y1="200" x2="400" y2="200" stroke="#004f80" strokeWidth="0.8" />
-        </svg>
+        {!hideHeader && (
+          <svg
+            className="absolute right-0 top-0 opacity-[0.04] pointer-events-none"
+            width="400"
+            height="400"
+            viewBox="0 0 400 400"
+            fill="none"
+          >
+            <circle cx="200" cy="200" r="160" stroke="#004f80" strokeWidth="1" />
+            <circle cx="200" cy="200" r="100" stroke="#004f80" strokeWidth="1" />
+            <circle cx="200" cy="200" r="40" stroke="#004f80" strokeWidth="1" />
+            <line x1="200" y1="0" x2="200" y2="400" stroke="#004f80" strokeWidth="0.8" />
+            <line x1="0" y1="200" x2="400" y2="200" stroke="#004f80" strokeWidth="0.8" />
+          </svg>
+        )}
         <div className="absolute inset-0 grid-bg-light opacity-50"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="max-w-2xl mx-auto text-center mb-16 reveal">
-            <span className="badge-light mb-4">Our Services</span>
-            <h2
-              className="font-display font-800 leading-tight mt-4"
-              style={{
-                fontSize: 'clamp(2rem,4vw,3.2rem)',
-                color: 'var(--text-h)',
-              }}
-            >
-              Comprehensive <span className="gt-brand">Land Surveying</span> Solutions
-            </h2>
-            <p
-              className="mt-4 text-base leading-relaxed"
-              style={{ color: 'var(--text-body)' }}
-            >
-              Click any service card to learn more. Accurate, legally-valid surveys tailored to your specific project needs.
-            </p>
-          </div>
+          {!hideHeader && (
+            <div className="max-w-2xl mx-auto text-center mb-16 reveal">
+              <span className="badge-light mb-4">Our Services</span>
+              <h2
+                className="font-display font-800 leading-tight mt-4"
+                style={{
+                  fontSize: 'clamp(2rem,4vw,3.2rem)',
+                  color: 'var(--text-h)',
+                }}
+              >
+                Comprehensive <span className="gt-brand">Land Surveying</span> Solutions
+              </h2>
+              <p
+                className="mt-4 text-base leading-relaxed"
+                style={{ color: 'var(--text-body)' }}
+              >
+                Click any service card to learn more. Accurate, legally-valid surveys tailored to your specific project needs.
+              </p>
+            </div>
+          )}
 
           {/* Service Cards */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className={variant === 'page' ? 'grid gap-12' : 'grid sm:grid-cols-2 lg:grid-cols-3 gap-6'}>
             {services.map((service, index) => {
               const tagColor = tagColors[service.tag];
+
+              if (variant === 'page') {
+                return (
+                  <div
+                    key={service.id}
+                    onClick={() => setActiveModal(service.id)}
+                    className="flex flex-col lg:flex-row gap-8 items-center reveal bg-white rounded-[2.5rem] p-4 lg:p-8 hover:shadow-2xl transition-all duration-500 border border-blue-50/50 group cursor-pointer"
+                    style={{ transitionDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="w-full lg:w-[45%] h-72 lg:h-[400px] relative rounded-[2rem] overflow-hidden flex-shrink-0">
+                      <img
+                        src={service.img}
+                        alt={service.title}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      <div className="img-ov-lite opacity-40"></div>
+                      <div className="absolute top-6 left-6">
+                        <span
+                          className="px-4 py-2 rounded-xl text-xs font-display font-800 uppercase tracking-widest bg-white/90 backdrop-blur-md shadow-lg"
+                          style={{ color: 'var(--brand)' }}
+                        >
+                          {service.tag}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex-grow p-4 lg:p-6">
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className="text-5xl font-display font-800 opacity-10 gt-brand">
+                          {String(index + 1).padStart(2, '0')}
+                        </span>
+                        <div className="h-px bg-blue-100 flex-grow"></div>
+                      </div>
+
+                      <h3 className="font-display font-800 text-3xl lg:text-4xl mb-6 leading-tight" style={{ color: 'var(--text-h)' }}>
+                        {service.title}
+                      </h3>
+
+                      <div className="space-y-4 mb-8">
+                        {service.body.slice(0, 2).map((p, i) => (
+                          <p key={i} className="text-lg leading-relaxed text-gray-600">
+                            {p}
+                          </p>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap items-center gap-6 mt-8">
+                        <Link href={`/services/${service.id}`} className="btn-brand px-8 py-3.5 rounded-2xl text-sm flex items-center gap-2">
+                          Learn Detailed Services
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+
+                        <div className="flex items-center gap-2 text-sm font-display font-700 text-blue-400 group-hover:text-blue-600 transition-colors">
+                          <span className="w-2 h-2 rounded-full bg-blue-400"></span>
+                          Precision Guaranteed
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              }
+
               return (
-                <div
+                <Link
                   key={service.id}
-                  onClick={() => setActiveModal(service.id)}
-                  className="svc-card reveal group"
+                  href={`/services/${service.id}`}
+                  className="svc-card reveal group block border-none text-left"
                   style={{ transitionDelay: `${index * 0.08}s` }}
                 >
                   <div className="h-52 relative overflow-hidden">
@@ -202,7 +179,7 @@ export default function Services() {
                       </svg>
                     </span>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

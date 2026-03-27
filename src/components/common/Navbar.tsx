@@ -17,11 +17,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: '#home', label: 'Home' },
-    { href: '#services', label: 'Services' },
-    { href: '#why', label: 'Why Us' },
-    { href: '#about', label: 'About' },
-    { href: '#contact', label: 'Contact' },
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/why-us', label: 'Why Us' },
+    { href: '/about', label: 'About' },
+    { href: '/contact-us', label: 'Contact' },
   ];
 
   return (
@@ -30,30 +30,29 @@ export default function Navbar() {
       style={
         scrolled
           ? {
-              padding: '0.5rem 0',
-              background: 'rgba(255,255,255,0.96)',
-              backdropFilter: 'blur(24px)',
-              WebkitBackdropFilter: 'blur(24px)',
-              boxShadow: '0 4px 24px rgba(0,79,128,0.08)',
-            }
+            padding: '0.5rem 0',
+            background: 'rgba(255,255,255,0.96)',
+            backdropFilter: 'blur(24px)',
+            WebkitBackdropFilter: 'blur(24px)',
+            boxShadow: '0 4px 24px rgba(0,79,128,0.08)',
+          }
           : {
-              padding: '1rem 0',
-              background: 'transparent',
-            }
+            padding: '1rem 0',
+            background: 'transparent',
+          }
       }
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="#home" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="Clearview"
-              className={`h-11 w-11 object-contain transition ${
-                scrolled ? 'logo-light' : 'logo-dark'
-              }`}
+              className={`h-16 w-16 object-contain transition ${scrolled ? 'logo-light' : 'logo-light'
+                }`}
             />
-            <div className="hidden sm:block">
+            {/* <div className="hidden sm:block">
               <p
                 className="font-display font-800 text-base leading-none tracking-tight"
                 style={{ color: scrolled ? 'rgb(17, 24, 39)' : '#ffffff' }}
@@ -68,7 +67,7 @@ export default function Navbar() {
               >
                 Land Survey
               </p>
-            </div>
+            </div> */}
           </Link>
 
           {/* Desktop Links */}
@@ -77,7 +76,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={scrolled ? 'nav-light' : 'nav-dark'}
+                className={scrolled ? 'nav-light' : 'nav-light'}
               >
                 {link.label}
               </Link>
@@ -87,7 +86,7 @@ export default function Navbar() {
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center gap-3">
             <Link
-              href="#contact"
+              href="/order"
               className="hidden md:inline-flex btn-brand items-center gap-2 px-5 py-2.5 rounded-xl text-sm"
             >
               Order Survey
@@ -113,14 +112,14 @@ export default function Navbar() {
               style={
                 scrolled
                   ? {
-                      border: '1px solid rgb(219, 234, 254)',
-                      background: '#ffffff',
-                    }
+                    border: '1px solid rgb(219, 234, 254)',
+                    background: '#ffffff',
+                  }
                   : {
-                      background: 'rgba(0, 20, 40, 0.75)',
-                      backdropFilter: 'blur(20px)',
-                      WebkitBackdropFilter: 'blur(20px)',
-                    }
+                    background: 'rgba(0, 20, 40, 0.75)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)',
+                  }
               }
             >
               <span
@@ -170,7 +169,7 @@ export default function Navbar() {
               </Link>
             ))}
             <Link
-              href="#contact"
+              href="/order"
               className="btn-brand block text-center px-5 py-2.5 rounded-xl text-sm mt-2"
             >
               Order Survey

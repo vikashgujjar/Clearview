@@ -1,11 +1,97 @@
 'use client';
 
-export default function About() {
+export default function About({ 
+  whiteBg = false,
+  variant = 'grid'
+}: { 
+  whiteBg?: boolean;
+  variant?: 'grid' | 'page';
+}) {
+  if (variant === 'page') {
+    return (
+      <section
+        id="about"
+        style={{
+          background: whiteBg ? '#ffffff' : '#f7fbff',
+          padding: '6rem 0',
+          position: 'relative',
+          overflow: 'hidden',
+        }}
+      >
+        <div className="absolute inset-0 grid-bg-light opacity-30"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-16 items-center mb-24">
+            <div className="reveal">
+              <span className="badge-light mb-6 block w-fit">About Clearview</span>
+              <h2 className="font-display font-800 text-4xl sm:text-5xl leading-tight mb-8" style={{ color: 'var(--text-h)' }}>
+                Building Trust Through <span className="gt-brand">Unwavering Precision</span>
+              </h2>
+              <p className="text-lg leading-relaxed mb-8" style={{ color: 'var(--text-body)' }}>
+                Clearview Land Survey was founded on a simple principle: every property line has a story, and every measurement dictates the future of that story. Since 2003, we've combined decades of hands-on experience with the absolute forefront of survey technology.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex-1 min-w-[240px] p-6 rounded-2xl bg-blue-50/40 border border-blue-100">
+                  <h3 className="font-display font-800 text-lg mb-2 text-brand">Our Mission</h3>
+                  <p className="text-sm text-gray-600">To provide the most reliable spatial data for construction, legal, and residential boundary decisions.</p>
+                </div>
+                <div className="flex-1 min-w-[240px] p-6 rounded-2xl bg-sky-50/40 border border-sky-100">
+                  <h3 className="font-display font-800 text-lg mb-2 text-sky-600">Our Vision</h3>
+                  <p className="text-sm text-gray-600">Integrating LiDAR and autonomous mapping to redefine efficiency and accuracy in the field.</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative reveal" style={{ transitionDelay: '0.2s' }}>
+              <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
+                <img 
+                  src="/about_surveyor.png" 
+                  className="w-full h-full object-cover" 
+                  alt="Precision Surveying" 
+                />
+              </div>
+              <div className="absolute -bottom-8 -left-8 bg-brand p-8 rounded-3xl shadow-xl text-white max-w-[240px]">
+                <div className="text-4xl font-display font-800 mb-1">20+</div>
+                <div className="text-xs uppercase tracking-widest font-600 opacity-80">Years of Field Expertise</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 reveal" style={{ transitionDelay: '0.3s' }}>
+            {[
+              {
+                title: 'Licensed Excellence',
+                desc: 'Every survey is signed and sealed by a state-licensed professional land surveyor.',
+                num: '01'
+              },
+              {
+                title: 'High-Tech Hardware',
+                desc: 'We utilize GPS, Robotic Total Stations, and 3D scanners for millimetric accuracy.',
+                num: '02'
+              },
+              {
+                title: 'Verified Results',
+                desc: 'Our double-check protocols ensure data integrity from the field to the final plat.',
+                num: '03'
+              }
+            ].map((pillar, i) => (
+              <div key={i} className="p-8 rounded-3xl border border-gray-100 bg-white hover:border-blue-200 transition-colors group">
+                <div className="text-4xl font-display font-900 text-blue-50/80 mb-6 group-hover:text-blue-100 transition-colors">
+                  {pillar.num}
+                </div>
+                <h4 className="font-display font-800 text-xl mb-4" style={{ color: 'var(--text-h)' }}>{pillar.title}</h4>
+                <p className="text-sm leading-relaxed text-gray-500">{pillar.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section
       id="about"
       style={{
-        background: '#f7fbff',
+        background: whiteBg ? '#ffffff' : '#f7fbff',
         padding: '6rem 0',
         position: 'relative',
         overflow: 'hidden',

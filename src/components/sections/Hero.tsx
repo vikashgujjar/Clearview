@@ -40,17 +40,9 @@ export default function Hero() {
      const [current, setCurrent] = useState(0);
      const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
 
-     const next = () => {
-          setCurrent((current + 1) % slides.length);
-     };
-
-     const prev = () => {
-          setCurrent((current - 1 + slides.length) % slides.length);
-     };
-
-     const go = (i: number) => {
-          setCurrent(i);
-     };
+     const next = () => { setCurrent((current + 1) % slides.length); };
+     const prev = () => { setCurrent((current - 1 + slides.length) % slides.length); };
+     const go = (i: number) => { setCurrent(i); };
 
      const resetTimer = () => {
           if (timer) clearInterval(timer);
@@ -62,9 +54,7 @@ export default function Hero() {
 
      useEffect(() => {
           resetTimer();
-          return () => {
-               if (timer) clearInterval(timer);
-          };
+          return () => { if (timer) clearInterval(timer); };
      }, [current]);
 
      return (
@@ -72,23 +62,27 @@ export default function Hero() {
                id="home"
                className="relative min-h-screen flex items-center overflow-hidden scanline-wrap"
                style={{
-                    background: `radial-gradient(ellipse at 65% 40%,rgba(0,79,128,0.22) 0%,transparent 60%),radial-gradient(ellipse at 10% 80%,rgba(0,102,166,0.12) 0%,transparent 55%),#030d16`,
+                    /* CHANGED: #030d16 → light blue base */
+                    background: `radial-gradient(ellipse at 65% 40%,rgba(0,79,128,0.12) 0%,transparent 60%),radial-gradient(ellipse at 10% 80%,rgba(0,102,166,0.07) 0%,transparent 55%),#eef6ff`,
                }}
           >
-               <div className="grid-bg-dark absolute inset-0"></div>
+               {/* CHANGED: grid-bg-dark → grid-bg-light */}
+               <div className="grid-bg-light absolute inset-0"></div>
 
                {/* Floating blobs */}
                <div
                     className="absolute top-28 right-20 w-96 h-96 rounded-full blur-3xl pointer-events-none"
                     style={{
-                         background: 'radial-gradient(circle,rgba(0,79,128,0.2),transparent 70%)',
+                         /* CHANGED: opacity 0.2 → 0.1 */
+                         background: 'radial-gradient(circle,rgba(0,79,128,0.1),transparent 70%)',
                          animation: 'float 6s ease-in-out infinite',
                     }}
                ></div>
                <div
                     className="absolute bottom-20 left-16 w-72 h-72 rounded-full blur-3xl pointer-events-none"
                     style={{
-                         background: 'radial-gradient(circle,rgba(0,170,238,0.1),transparent 70%)',
+                         /* CHANGED: rgba(0,170,238,0.1) → rgba(0,79,128,0.07) */
+                         background: 'radial-gradient(circle,rgba(0,79,128,0.07),transparent 70%)',
                          animation: 'float 5s ease-in-out infinite 1.5s',
                     }}
                ></div>
@@ -98,40 +92,55 @@ export default function Hero() {
                          {/* Left Content */}
                          <div className="space-y-8">
                               <div
-                                   className="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-xs font-display font-600 tracking-widest uppercase animate-fadeUp"
-                                   style={{ color: '#00aaee' }}
+                                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-display font-600 tracking-widest uppercase animate-fadeUp"
+                                   style={{
+                                        /* CHANGED: glass dark + cyan → light badge blue */
+                                        background: 'rgba(0,79,128,0.08)',
+                                        border: '1px solid rgba(0,79,128,0.22)',
+                                        color: '#004f80',
+                                   }}
                               >
-                                   <span className="w-2 h-2 rounded-full animate-pulse2" style={{ background: '#00aaee' }}></span>
+                                   {/* CHANGED: background #00aaee → #004f80 */}
+                                   <span className="w-2 h-2 rounded-full animate-pulse2" style={{ background: '#004f80' }}></span>
                                    Licensed Professional Surveyors
                               </div>
 
                               <h1
-                                   className="font-display font-800 text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight animate-fadeUp"
+                                   className="font-display uppercase font-800 text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight animate-fadeUp"
                                    style={{ animationDelay: '0.1s' }}
                               >
-                                   <span className="gt-white">Intelligence</span>
+                                   {/* CHANGED: gt-white → dark navy */}
+                                   <span style={{ color: '#0a1628' }}>Intelligence</span>
                                    <br />
-                                   <span className="gt-sky-dark">Isn&apos;t</span>
+                                   {/* CHANGED: gt-sky-dark (cyan) → gt-brand (navy→blue) */}
+                                   <span className="gt-brand">Isn&apos;t</span>
                                    <br />
-                                   <span className="text-white">Artificial.</span>
+                                   {/* CHANGED: text-white → dark navy */}
+                                   <span style={{ color: '#1a3a5c' }}>Artificial.</span>
                               </h1>
 
                               <p
-                                   className="text-gray-400 text-lg leading-relaxed max-w-xl animate-fadeUp"
-                                   style={{ animationDelay: '0.2s' }}
+                                   className="text-lg leading-relaxed max-w-xl animate-fadeUp"
+                                   style={{
+                                        /* CHANGED: text-gray-400 → readable dark blue */
+                                        color: '#2d4a63',
+                                        animationDelay: '0.2s',
+                                   }}
                               >
                                    Clearview Land Survey delivers precision boundary surveys, ALTA reports, topographic mapping, and
                                    construction layout — with the expertise your property deserves.
                               </p>
 
                               <div className="flex flex-wrap gap-4 animate-fadeUp" style={{ animationDelay: '0.3s' }}>
+                                   {/* btn-brand unchanged — already works on light */}
                                    <Link href="#services" className="btn-brand px-8 py-3.5 rounded-xl text-sm flex items-center gap-2">
                                         Our Services
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                         </svg>
                                    </Link>
-                                   <Link href="#contact" className="btn-outline-dark px-8 py-3.5 rounded-xl text-sm flex items-center gap-2">
+                                   {/* CHANGED: btn-outline-dark (cyan) → btn-outline-brand (navy) */}
+                                   <Link href="#contact" className="btn-outline-brand px-8 py-3.5 rounded-xl text-sm flex items-center gap-2">
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                              <path
                                                   strokeLinecap="round"
@@ -145,22 +154,29 @@ export default function Hero() {
                               </div>
 
                               <div
-                                   className="flex flex-wrap gap-8 pt-4 border-t border-white/8 animate-fadeUp"
-                                   style={{ animationDelay: '0.4s' }}
+                                   className="flex flex-wrap gap-8 pt-4 animate-fadeUp"
+                                   style={{
+                                        /* CHANGED: border-white/8 → light blue border */
+                                        borderTop: '1px solid rgba(0,79,128,0.12)',
+                                        animationDelay: '0.4s',
+                                   }}
                               >
                                    <div>
-                                        <div className="font-display font-800 text-3xl gt-sky-dark">20+</div>
-                                        <div className="text-gray-500 text-xs uppercase tracking-wider mt-0.5">Years Experience</div>
+                                        {/* CHANGED: gt-sky-dark → gt-brand */}
+                                        <div className="font-display font-800 text-3xl gt-brand">20+</div>
+                                        {/* CHANGED: text-gray-500 → muted navy */}
+                                        <div className="text-xs uppercase tracking-wider mt-0.5" style={{ color: '#7a9ab5' }}>Years Experience</div>
                                    </div>
-                                   <div className="w-px bg-white/10"></div>
+                                   {/* CHANGED: bg-white/10 → light blue divider */}
+                                   <div className="w-px" style={{ background: 'rgba(0,79,128,0.15)' }}></div>
                                    <div>
-                                        <div className="font-display font-800 text-3xl gt-sky-dark">6</div>
-                                        <div className="text-gray-500 text-xs uppercase tracking-wider mt-0.5">Survey Services</div>
+                                        <div className="font-display font-800 text-3xl gt-brand">6</div>
+                                        <div className="text-xs uppercase tracking-wider mt-0.5" style={{ color: '#7a9ab5' }}>Survey Services</div>
                                    </div>
-                                   <div className="w-px bg-white/10"></div>
+                                   <div className="w-px" style={{ background: 'rgba(0,79,128,0.15)' }}></div>
                                    <div>
-                                        <div className="font-display font-800 text-3xl gt-sky-dark">100%</div>
-                                        <div className="text-gray-500 text-xs uppercase tracking-wider mt-0.5">Licensed & Insured</div>
+                                        <div className="font-display font-800 text-3xl gt-brand">100%</div>
+                                        <div className="text-xs uppercase tracking-wider mt-0.5" style={{ color: '#7a9ab5' }}>Licensed &amp; Insured</div>
                                    </div>
                               </div>
                          </div>
@@ -168,7 +184,7 @@ export default function Hero() {
                          {/* Right Carousel */}
                          <div className="hidden lg:block animate-fadeUp" style={{ animationDelay: '0.25s' }}>
                               <div className="relative rounded-3xl overflow-hidden" style={{ height: '480px', boxShadow: '0 32px 80px rgba(0,10,30,0.55),0 0 0 1px rgba(0,170,238,0.15)' }}>
-                                   {/* Slides */}
+                                   {/* Slides — unchanged, images have dark overlay so no color change needed */}
                                    {slides.map((slide, i) => (
                                         <div
                                              key={i}
@@ -203,7 +219,7 @@ export default function Hero() {
                                         </div>
                                    ))}
 
-                                   {/* Corner Brackets */}
+                                   {/* Corner Brackets — unchanged */}
                                    {[
                                         { top: 5, left: 5, pos: 'TL' },
                                         { top: 5, right: 5, pos: 'TR' },
@@ -213,7 +229,7 @@ export default function Hero() {
                                         <svg
                                              key={i}
                                              className="absolute w-10 h-10 opacity-60 z-10"
-                                             style={bracket as any}
+                                             style={bracket as React.CSSProperties}
                                              viewBox="0 0 40 40"
                                              fill="none"
                                         >
@@ -236,7 +252,7 @@ export default function Hero() {
                                         </svg>
                                    ))}
 
-                                   {/* Top Badge */}
+                                   {/* Top Badge — unchanged (on image, dark bg fine) */}
                                    <div className="absolute top-6 left-1/2 -translate-x-1/2 z-10">
                                         <div
                                              className="flex items-center gap-2 px-3.5 py-1.5 rounded-full"
@@ -251,7 +267,7 @@ export default function Hero() {
                                         </div>
                                    </div>
 
-                                   {/* Slide Counter */}
+                                   {/* Slide Counter — unchanged */}
                                    <div
                                         className="absolute top-6 right-14 z-10 text-xs font-mono"
                                         style={{ color: 'rgba(255,255,255,0.5)' }}
@@ -261,7 +277,7 @@ export default function Hero() {
                                         <span>{String(slides.length).padStart(2, '0')}</span>
                                    </div>
 
-                                   {/* Caption */}
+                                   {/* Caption — unchanged (on dark overlay) */}
                                    <div className="absolute bottom-0 left-0 right-0 z-10 p-6">
                                         <div
                                              className="rounded-2xl p-4"
@@ -281,7 +297,7 @@ export default function Hero() {
                                                        </p>
                                                   </div>
 
-                                                  {/* Dot Indicators */}
+                                                  {/* Dot Indicators — unchanged */}
                                                   <div className="flex items-center gap-1.5 flex-shrink-0 pb-0.5">
                                                        {slides.map((_, i) => (
                                                             <button
@@ -298,7 +314,7 @@ export default function Hero() {
                                                   </div>
                                              </div>
 
-                                             {/* Progress Bar */}
+                                             {/* Progress Bar — unchanged */}
                                              <div className="mt-3 h-0.5 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.1)' }}>
                                                   <div
                                                        className="h-full rounded-full"
@@ -311,7 +327,7 @@ export default function Hero() {
                                         </div>
                                    </div>
 
-                                   {/* Prev/Next Buttons */}
+                                   {/* Prev/Next Buttons — unchanged */}
                                    <button
                                         onClick={prev}
                                         className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-xl flex items-center justify-center transition-all hover:scale-110"
@@ -343,33 +359,48 @@ export default function Hero() {
                               {/* Floating Badges Below Carousel */}
                               <div className="flex gap-3 mt-4 justify-center">
                                    <div
-                                        className="glass px-3.5 py-2 rounded-2xl flex items-center gap-2 animate-glow"
-                                        style={{ animationDelay: '0s' }}
+                                        className="px-3.5 py-2 rounded-2xl flex items-center gap-2"
+                                        style={{
+                                             /* CHANGED: glass dark + animate-glow → light brand card */
+                                             background: 'rgba(0,79,128,0.09)',
+                                             border: '1px solid rgba(0,79,128,0.22)',
+                                             animation: 'glowLight 2.8s ease-in-out infinite',
+                                        }}
                                    >
-                                        <div
-                                             className="w-5 h-5 rounded-full"
-                                             style={{ background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                                        >
+                                        <div className="w-5 h-5 flex items-center justify-center">
                                              <img
                                                   src="/logo.png"
-                                                  alt="Clearview" className='w-full h-full' />
+                                                  alt="Clearview"
+                                                  className="w-full h-full object-contain"
+                                                  /* CHANGED: logo filter → light version */
+                                                  style={{ filter: 'brightness(0) saturate(100%) invert(14%) sepia(80%) saturate(600%) hue-rotate(185deg) brightness(80%) contrast(115%)' }}
+                                             />
                                         </div>
-                                        <span className="text-xs font-display font-700 text-white">Licensed & Certified</span>
+                                        {/* CHANGED: text-white → #004f80 */}
+                                        <span className="text-xs font-display font-700" style={{ color: '#004f80' }}>Licensed &amp; Certified</span>
                                    </div>
-                                   <div className="glass px-3.5 py-2 rounded-2xl flex items-center gap-2">
-                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                                        <span className="text-xs font-display font-700 text-white">GPS + Drone Technology</span>
+                                   <div
+                                        className="px-3.5 py-2 rounded-2xl flex items-center gap-2"
+                                        style={{
+                                             /* CHANGED: glass dark → light blue */
+                                             background: 'rgba(0,79,128,0.06)',
+                                             border: '1px solid rgba(0,79,128,0.15)',
+                                        }}
+                                   >
+                                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        {/* CHANGED: text-white → dark navy */}
+                                        <span className="text-xs font-display font-700" style={{ color: '#1a3a5c' }}>GPS + Drone Technology</span>
                                    </div>
                               </div>
 
                               <style>{`
               @keyframes heroProgress {
-                from {
-                  width: 0;
-                }
-                to {
-                  width: 100%;
-                }
+                from { width: 0; }
+                to   { width: 100%; }
+              }
+              @keyframes glowLight {
+                0%,100% { box-shadow: 0 0 16px rgba(0,79,128,0.18); }
+                50%      { box-shadow: 0 0 30px rgba(0,79,128,0.35); }
               }
             `}</style>
                          </div>
@@ -378,8 +409,10 @@ export default function Hero() {
 
                {/* Scroll indicator */}
                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 opacity-40">
-                    <span className="text-xs tracking-widest uppercase text-gray-500">Scroll</span>
-                    <div className="w-px h-10" style={{ background: 'linear-gradient(to bottom,#00aaee,transparent)' }}></div>
+                    {/* CHANGED: text-gray-500 → muted blue */}
+                    <span className="text-xs tracking-widest uppercase" style={{ color: '#7a9ab5' }}>Scroll</span>
+                    {/* CHANGED: #00aaee → #004f80 */}
+                    <div className="w-px h-10" style={{ background: 'linear-gradient(to bottom,#004f80,transparent)' }}></div>
                </div>
           </section>
      );

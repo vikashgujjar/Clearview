@@ -1,11 +1,11 @@
 'use client';
 
-export default function Contact() {
+export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
   return (
     <section
       id="contact"
       style={{
-        background: 'linear-gradient(180deg, #e4f0fc 0%, #ddeeff 100%)',
+        background: whiteBg ? '#ffffff' : 'linear-gradient(180deg, #e4f0fc 0%, #ddeeff 100%)',
         padding: '6rem 0',
         position: 'relative',
         overflow: 'hidden',
