@@ -116,9 +116,15 @@ h5 {
   color: var(--brand-lt);
 }
 
-.nav-light:hover::after {
+.nav-light:hover::after,
+.nav-active::after {
   width: 100%;
 }
+
+.nav-active {
+  color: var(--brand-lt);
+}
+
 
 /* ── BUTTONS ── */
 .btn-brand {

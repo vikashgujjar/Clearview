@@ -1,11 +1,13 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,8 +23,10 @@ export default function Navbar() {
     { href: '/services', label: 'Services' },
     { href: '/why-us', label: 'Why Us' },
     { href: '/about', label: 'About' },
+    { href: '/unique-survey-sample', label: 'Unique Survey Sample' },
     { href: '/contact-us', label: 'Contact' },
   ];
+
 
   return (
     <nav
@@ -72,16 +76,20 @@ export default function Navbar() {
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={scrolled ? 'nav-light' : 'nav-light'}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`nav-light ${isActive ? 'nav-active' : ''}`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
+
 
           {/* CTA Button and Mobile Menu */}
           <div className="flex items-center gap-3">
@@ -157,17 +165,22 @@ export default function Navbar() {
             className="md:hidden mt-3 bg-white rounded-2xl p-5 space-y-1 shadow-xl border"
             style={{ borderColor: 'rgba(0,79,128,0.13)' }}
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="block py-2.5 px-4 rounded-xl text-sm font-display font-600 hover:bg-blue-50 transition"
-                style={{ color: '#1a3a5c' }}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={`block py-2.5 px-4 rounded-xl text-sm font-display font-600 transition ${isActive ? 'bg-blue-50' : 'hover:bg-blue-50'
+                    }`}
+                  style={{ color: isActive ? 'var(--brand)' : '#1a3a5c' }}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+
             <Link
               href="/order"
               className="btn-brand block text-center px-5 py-2.5 rounded-xl text-sm mt-2"

@@ -1,4 +1,6 @@
-'use client';
+import Link from 'next/link';
+import { services } from '@/data/services';
+
 
 export default function Footer() {
   return (
@@ -32,7 +34,7 @@ export default function Footer() {
               Licensed land surveying professionals. Precision, integrity, and clear results — every time.
             </p>
             <p className="text-xs italic font-display" style={{ color: '#fff' }}>
-              "Intelligence Isn't Artificial."
+              &quot;Intelligence Isn&apos;t Artificial.&quot;
             </p>
             <div className="flex items-center gap-2 mt-4">
               <div
@@ -62,21 +64,20 @@ export default function Footer() {
               Services
             </h4>
             <ul className="space-y-3">
-              {['ALTA Surveys', 'Boundary Surveys', 'As-Built Surveys', 'Construction Layout', 'Elevation Certificates', 'Topographic Survey'].map(
-                (service) => (
-                  <li key={service}>
-                    <a
-                      href="#services"
-                      className="text-gray-500 text-sm hover:text-sky-400 transition-colors flex items-center gap-2"
-                    >
-                      <span className="w-1 h-1 rounded-full" style={{ background: '#004f80' }}></span>
-                      {service}
-                    </a>
-                  </li>
-                )
-              )}
+              {services.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href={`/services/${service.id}`}
+                    className="text-gray-500 text-sm hover:text-sky-400 transition-colors flex items-center gap-2"
+                  >
+                    <span className="w-1 h-1 rounded-full" style={{ background: '#004f80' }}></span>
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
+
 
           {/* Quick Links */}
           <div>
@@ -85,20 +86,21 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3">
               {[
-                { label: 'Home', href: '#home' },
-                { label: 'Services', href: '#services' },
-                { label: 'Why Choose Us', href: '#why' },
-                { label: 'About', href: '#about' },
-                { label: 'Order Now', href: '#contact' },
+                { label: 'Home', href: '/' },
+                { label: 'Services', href: '/services' },
+                { label: 'Why Choose Us', href: '/why-us' },
+                { label: 'About Us', href: '/about' },
+                { label: 'Survey Sample', href: '/unique-survey-sample' },
+                { label: 'Contact Us', href: '/contact-us' },
               ].map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-gray-500 text-sm hover:text-sky-400 transition-colors flex items-center gap-2"
                   >
                     <span className="w-1 h-1 rounded-full bg-emerald-700"></span>
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -145,13 +147,14 @@ export default function Footer() {
                 <span className="text-gray-500 text-sm">Mon–Fri: 8:00 AM – 5:00 PM</span>
               </li>
               <li className="mt-6">
-                <a href="#contact" className="btn-brand block text-center px-5 py-2.5 rounded-xl text-sm">
+                <Link href="/order" className="btn-brand block text-center px-5 py-2.5 rounded-xl text-sm">
                   Order Now →
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
+
 
         <div
           className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
