@@ -38,7 +38,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
             Request a <span className="gt-brand">Survey Quote</span>
           </h2>
           <p className="mt-4 text-base" style={{ color: 'var(--text-body)' }}>
-            Detailed, transparent quote — no vague estimates, ever. We respond within 24 hours.
+            Detailed, transparent quote — no vague estimates, ever. We respond within 1 hours.
           </p>
         </div>
 
@@ -236,7 +236,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   Submit Quote Request
                 </button>
                 <p className="text-center text-xs" style={{ color: 'var(--text-muted)' }}>
-                  We respond within 24 hours with a detailed, transparent quote.
+                  We respond within 1 hours with a detailed, transparent quote.
                 </p>
               </form>
             </div>

@@ -10,7 +10,7 @@ export default function Footer() {
         borderTop: '2px solid rgba(0,79,128,0.3)',
       }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 pb-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Section */}
           <div>
@@ -157,20 +157,20 @@ export default function Footer() {
 
 
         <div
-          className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4"
+          className="mt-12 pt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
           style={{
             borderTop: '1px solid rgba(255,255,255,0.05)',
           }}
         >
           <p className="text-gray-600 text-xs">© 2025 Clearview Land Survey. All rights reserved.</p>
-          <div className="flex gap-6">
+          {/* <div className="flex gap-6">
             <a href="#" className="text-gray-600 text-xs hover:text-gray-400 transition">
               Privacy Policy
             </a>
             <a href="#" className="text-gray-600 text-xs hover:text-gray-400 transition">
               Terms of Service
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>
