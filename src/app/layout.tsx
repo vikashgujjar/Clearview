@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   description: 'Professional Land Surveying Services',
   icons: {
     icon: '/logo.png',
+    apple: '/logo.png',
   },
 }
 

@@ -1,6 +1,71 @@
 'use client';
 
+import React, { useState } from 'react';
+import Swal from 'sweetalert2';
+
 export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
+  const [loader, setLoader] = useState(false);
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    surveyType: '',
+    details: '',
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoader(true);
+
+    const payload = {
+      company: "clearview",
+      company_name: "Clearview Land Survey",
+      moveType: "Contact Form",
+      mail_to: "doug@clearviewlandsurvey.com, michael@clearviewlandsurvey.com",
+      ...formData,
+    };
+
+    try {
+      const response = await fetch(
+        "https://mail.futuretouch.org/api/send-message",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        await Swal.fire({
+          icon: "success",
+          title: "Message Sent!",
+          text: "We have received your request and will contact you shortly.",
+          confirmButtonColor: '#004F80',
+        });
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          surveyType: '',
+          details: '',
+        });
+      } else {
+        Swal.fire("Error", "Failed to send message. Please try again.", "error");
+      }
+    } catch (error) {
+      console.error(error);
+      Swal.fire("Error", "Something went wrong!", "error");
+    } finally {
+      setLoader(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -184,31 +249,31 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
               <h3 className="font-display font-700 text-xl mb-6" style={{ color: 'var(--text-h)' }}>
                 Get Your Free Quote
               </h3>
-              <form className="space-y-4">
+              <form onSubmit={handleContactSubmit} className="space-y-4">
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="overline mb-2 block">First Name</label>
-                    <input type="text" placeholder="John" className="l-input" />
+                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required placeholder="John" className="l-input" />
                   </div>
                   <div>
                     <label className="overline mb-2 block">Last Name</label>
-                    <input type="text" placeholder="Doe" className="l-input" />
+                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required placeholder="Doe" className="l-input" />
                   </div>
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className="overline mb-2 block">Email</label>
-                    <input type="email" placeholder="john@company.com" className="l-input" />
+                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="john@company.com" className="l-input" />
                   </div>
                   <div>
                     <label className="overline mb-2 block">Phone</label>
-                    <input type="tel" placeholder="(555) 000-0000" className="l-input" />
+                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="l-input" />
                   </div>
                 </div>
                 <div>
                   <label className="overline mb-2 block">Survey Type</label>
-                  <select className="l-input">
-                    <option>Select a survey type</option>
+                  <select name="surveyType" value={formData.surveyType} onChange={handleChange} className="l-input">
+                    <option value="">Select a survey type</option>
                     <option>ALTA Survey</option>
                     <option>Boundary Survey</option>
                     <option>As-Built Survey</option>
@@ -221,6 +286,9 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                 <div>
                   <label className="overline mb-2 block">Project Details</label>
                   <textarea
+                    name="details"
+                    value={formData.details}
+                    onChange={handleChange}
                     rows={4}
                     placeholder="Tell us about your property and project requirements..."
                     className="l-input resize-none"
@@ -228,12 +296,19 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                 </div>
                 <button
                   type="submit"
-                  className="btn-brand w-full py-4 rounded-xl text-sm flex items-center justify-center gap-2 mt-2"
+                  disabled={loader}
+                  className="btn-brand w-full py-4 rounded-xl text-sm flex items-center justify-center gap-2 mt-2 disabled:opacity-70"
                 >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                  </svg>
-                  Submit Quote Request
+                  {loader ? (
+                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  ) : (
+                    <>
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                      </svg>
+                      Submit Quote Request
+                    </>
+                  )}
                 </button>
                 <p className="text-center text-xs" style={{ color: 'var(--text-muted)' }}>
                   We respond within 1 hours with a detailed, transparent quote.
@@ -246,3 +321,4 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
     </section>
   );
 }
+
