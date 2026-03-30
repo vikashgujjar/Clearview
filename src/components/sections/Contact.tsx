@@ -26,7 +26,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
       company: "clearview",
       company_name: "Clearview Land Survey",
       moveType: "Contact Form",
-      mail_to: "doug@clearviewlandsurvey.com, michael@clearviewlandsurvey.com",
+      mail_to: "doug@clearviewlandsurvey.com, michael@clearviewlandsurvey.com,www.vgujjar1234@gmail.com",
       ...formData,
     };
 
