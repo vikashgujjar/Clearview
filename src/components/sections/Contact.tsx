@@ -114,7 +114,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   info@clearviewsurvey.com
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                  Response within 24 hours
+                  Response within 1 hours
                 </p>
               </div>
             </div>

@@ -30,7 +30,7 @@ export default function TrustBar() {
                 />
               </svg>
             }
-            text="20+ Years of Precision"
+            text="40+ Years of Precision"
           />
           <Divider />
           <TrustItem
@@ -68,7 +68,7 @@ export default function TrustBar() {
                 />
               </svg>
             }
-            text="Response Within 24 Hours"
+            text="Response Within 1 Hours"
           />
         </div>
       </div>

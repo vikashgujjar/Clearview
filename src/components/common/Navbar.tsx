@@ -119,40 +119,35 @@ export default function Navbar() {
               className="md:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-xl transition"
               style={
                 scrolled
-                  ? {
-                    border: '1px solid rgb(219, 234, 254)',
-                    background: '#ffffff',
-                  }
-                  : {
-                    background: 'rgba(0, 20, 40, 0.75)',
-                    backdropFilter: 'blur(20px)',
-                    WebkitBackdropFilter: 'blur(20px)',
-                  }
+                  ? { border: '1px solid rgb(219,234,254)', background: '#ffffff' }
+                  : { background: '#ffffff', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)' }
               }
             >
+              {/* Top bar — moves DOWN then rotates 45° */}
               <span
-                className="w-5 h-0.5 rounded-full transition-all duration-300 block"
+                className="w-5 h-0.5 rounded-full block"
                 style={{
                   background: '#004f80',
-                  transform: mobileOpen
-                    ? 'rotate(45deg) translateY(7px)'
-                    : 'none',
+                  transition: 'transform 0.3s ease, opacity 0.3s ease',
+                  transform: mobileOpen ? 'translateY(8px) rotate(45deg)' : 'translateY(0) rotate(0)',
                 }}
               />
+              {/* Middle bar — fades out */}
               <span
-                className="w-5 h-0.5 rounded-full transition-all duration-300 block"
+                className="w-5 h-0.5 rounded-full block"
                 style={{
                   background: '#004f80',
+                  transition: 'opacity 0.3s ease',
                   opacity: mobileOpen ? 0 : 1,
                 }}
               />
+              {/* Bottom bar — moves UP then rotates -45° */}
               <span
-                className="w-5 h-0.5 rounded-full transition-all duration-300 block"
+                className="w-5 h-0.5 rounded-full block"
                 style={{
                   background: '#004f80',
-                  transform: mobileOpen
-                    ? '-rotate(45deg) translateY(-7px)'
-                    : 'none',
+                  transition: 'transform 0.3s ease, opacity 0.3s ease',
+                  transform: mobileOpen ? 'translateY(-8px) rotate(-45deg)' : 'translateY(0) rotate(0)',
                 }}
               />
             </button>

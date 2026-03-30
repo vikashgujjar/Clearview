@@ -1,9 +1,9 @@
 'use client';
 
-export default function About({ 
+export default function About({
   whiteBg = false,
   variant = 'grid'
-}: { 
+}: {
   whiteBg?: boolean;
   variant?: 'grid' | 'page';
 }) {
@@ -42,10 +42,10 @@ export default function About({
             </div>
             <div className="relative reveal" style={{ transitionDelay: '0.2s' }}>
               <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <img 
-                  src="/about_surveyor.png" 
-                  className="w-full h-full object-cover" 
-                  alt="Precision Surveying" 
+                <img
+                  src="/about_surveyor.png"
+                  className="w-full h-full object-cover"
+                  alt="Precision Surveying"
                 />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-brand p-8 rounded-3xl shadow-xl text-white max-w-[240px]">
@@ -127,12 +127,8 @@ export default function About({
                   <img
                     src="/logo.png"
                     alt="Clearview"
-                    className="w-10 h-10 object-contain logo-dark"
+                    className="w-14 h-14 object-contain logo-dark"
                   />
-                  <div>
-                    <p className="font-display font-700 text-white text-sm">Clearview Land Survey</p>
-                    <p className="text-sky-300 opacity-70 text-xs">Est. 2003</p>
-                  </div>
                 </div>
 
                 <div className="text-center py-8">
@@ -143,7 +139,7 @@ export default function About({
                       lineHeight: 1,
                     }}
                   >
-                    20+
+                    40+
                   </div>
                   <div className="font-display font-600 text-white text-xl">Years of Precision</div>
                   <p className="text-sm mt-3 max-w-xs mx-auto" style={{ color: 'rgba(56,197,245,0.6)' }}>
@@ -189,7 +185,7 @@ export default function About({
 
             {/* RIGHT — Content */}
             <div className="p-10 lg:p-12 flex flex-col justify-center" style={{ background: '#fff' }}>
-              <span className="badge-light mb-5">Precision & Expertise</span>
+              <span className="badge-light block w-auto mb-5 max-w-fit">Precision & Expertise</span>
               <h2
                 className="font-display font-800 leading-tight mb-5 mt-4 gt-brand"
                 style={{

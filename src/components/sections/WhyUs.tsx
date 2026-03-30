@@ -76,17 +76,17 @@ const reasons = [
 ];
 
 const stats = [
-  { value: '20+', label: 'Years Experience' },
+  { value: '40+', label: 'Years Experience' },
   { value: '6', label: 'Survey Types' },
   { value: '100%', label: 'Licensed & Insured' },
   { value: 'Fast', label: 'Rush Available', isBrand: true },
 ];
 
-export default function WhyUs({ 
-  hideHeader = false, 
+export default function WhyUs({
+  hideHeader = false,
   whiteBg = false,
   variant = 'grid'
-}: { 
+}: {
   hideHeader?: boolean;
   whiteBg?: boolean;
   variant?: 'grid' | 'page';
@@ -157,9 +157,9 @@ export default function WhyUs({
                   style={
                     stat.isBrand
                       ? {
-                          background: 'var(--brand)',
-                          borderColor: 'var(--brand)',
-                        }
+                        background: 'var(--brand)',
+                        borderColor: 'var(--brand)',
+                      }
                       : {}
                   }
                 >
@@ -195,24 +195,24 @@ export default function WhyUs({
           {reasons.map((reason, idx) => {
             if (variant === 'page') {
               return (
-                <div 
+                <div
                   key={idx}
                   className="group relative reveal p-8 rounded-3xl bg-white border border-blue-100/50 hover:shadow-2xl transition-all duration-500 overflow-hidden"
                   style={{ transitionDelay: `${(idx % 3) * 0.1}s` }}
                 >
-                  <div 
+                  <div
                     className="absolute -right-4 -top-4 w-32 h-32 opacity-[0.03] font-display font-800 pointer-events-none"
                     style={{ fontSize: '10rem', color: reason.textColor }}
                   >
                     {reason.number}
                   </div>
-                  
-                  <div 
+
+                  <div
                     className="w-14 h-14 rounded-2xl mb-8 flex items-center justify-center font-display font-800 text-xl shadow-lg border-2"
-                    style={{ 
-                      background: reason.bgColor, 
+                    style={{
+                      background: reason.bgColor,
                       borderColor: reason.borderColor,
-                      color: reason.textColor 
+                      color: reason.textColor
                     }}
                   >
                     {reason.number}
@@ -221,14 +221,14 @@ export default function WhyUs({
                   <h3 className="font-display font-800 text-xl mb-4 leading-tight group-hover:gt-brand transition-all" style={{ color: 'var(--text-h)' }}>
                     {reason.title}
                   </h3>
-                  
+
                   <p className="text-base leading-relaxed text-gray-600 mb-6 font-display font-500">
                     {reason.description}
                   </p>
 
                   <div className="flex items-center gap-2 mt-auto">
                     <div className="h-px bg-blue-50 flex-grow"></div>
-                    <span 
+                    <span
                       className="text-[0.6rem] font-800 uppercase tracking-widest leading-none"
                       style={{ color: reason.textColor }}
                     >
