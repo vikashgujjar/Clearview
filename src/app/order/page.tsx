@@ -96,7 +96,7 @@ export default function OrderPage() {
     gateAccessReq: false,
     gateCode: '',
     lotInstructions: '',
-    comments: '',
+    message: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -253,8 +253,8 @@ export default function OrderPage() {
 
             <div className="md:col-span-2">
               <div className="space-y-1">
-                <label className="overline mb-2 block">Comments or Special Instructions</label>
-                <textarea name="comments" value={formData.comments} onChange={handleChange} rows={4} className="l-input w-full resize-none"></textarea>
+                <label className="overline mb-2 block">Message / Special Instructions</label>
+                <textarea name="message" value={formData.message} onChange={handleChange} rows={4} className="l-input w-full resize-none"></textarea>
               </div>
             </div>
           </FormSection>

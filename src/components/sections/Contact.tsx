@@ -6,12 +6,11 @@ import Swal from 'sweetalert2';
 export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
+    name: '',
     email: '',
     phone: '',
-    surveyType: '',
-    details: '',
+    serviceType: '',
+    message: '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -25,9 +24,12 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
     const payload = {
       company: "clearview",
       company_name: "Clearview Land Survey",
-      moveType: "Contact Form",
-      mail_to: "amitprofficial@gmail.com,www.vgujjar1234@gmail.com",
-      ...formData,
+      name: formData.name,
+      phone: formData.phone,
+      email: formData.email,
+      serviceType: formData.serviceType,
+      message: formData.message,
+      mail_to: "doug@clearviewlandsurvey.com,michael@clearviewlandsurvey.com",
     };
 
     try {
@@ -48,12 +50,11 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
           confirmButtonColor: '#004F80',
         });
         setFormData({
-          firstName: '',
-          lastName: '',
+          name: '',
           email: '',
           phone: '',
-          surveyType: '',
-          details: '',
+          serviceType: '',
+          message: '',
         });
       } else {
         Swal.fire("Error", "Failed to send message. Please try again.", "error");
@@ -250,15 +251,9 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                 Get Your Free Quote
               </h3>
               <form onSubmit={handleContactSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label className="overline mb-2 block">First Name</label>
-                    <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required placeholder="John" className="l-input" />
-                  </div>
-                  <div>
-                    <label className="overline mb-2 block">Last Name</label>
-                    <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required placeholder="Doe" className="l-input" />
-                  </div>
+                <div>
+                  <label className="overline mb-2 block">Name</label>
+                  <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" className="l-input" />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
@@ -271,8 +266,8 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   </div>
                 </div>
                 <div>
-                  <label className="overline mb-2 block">Survey Type</label>
-                  <select name="surveyType" value={formData.surveyType} onChange={handleChange} className="l-input">
+                  <label className="overline mb-2 block">Service Type</label>
+                  <select name="serviceType" value={formData.serviceType} onChange={handleChange} className="l-input">
                     <option value="">Select a survey type</option>
                     <option>ALTA Survey</option>
                     <option>Boundary Survey</option>
@@ -284,10 +279,10 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   </select>
                 </div>
                 <div>
-                  <label className="overline mb-2 block">Project Details</label>
+                  <label className="overline mb-2 block">Message</label>
                   <textarea
-                    name="details"
-                    value={formData.details}
+                    name="message"
+                    value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell us about your property and project requirements..."
