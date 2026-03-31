@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 
 export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
   const [loader, setLoader] = useState(false);
+  const [errors, setErrors] = useState<any>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -14,11 +15,49 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors((prev: any) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: any = {};
+    
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Invalid email address';
+    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone is required';
+    if (!formData.serviceType) newErrors.serviceType = 'Please select a service';
+    if (!formData.message.trim()) newErrors.message = 'Message is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please fill in all required fields correctly.',
+        confirmButtonColor: '#004F80',
+      });
+      return;
+    }
+
     setLoader(true);
 
     const payload = {
@@ -250,24 +289,55 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
               <h3 className="font-display font-700 text-xl mb-6" style={{ color: 'var(--text-h)' }}>
                 Get Your Free Quote
               </h3>
-              <form onSubmit={handleContactSubmit} className="space-y-4">
+              <form onSubmit={handleContactSubmit} className="space-y-4" noValidate>
                 <div>
-                  <label className="overline mb-2 block">Name</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" className="l-input" />
+                  <label className={`overline mb-2 block ${errors.name ? 'text-red-500' : ''}`}>Name</label>
+                  <input 
+                    type="text" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    required 
+                    placeholder="Full Name" 
+                    className={`l-input ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                  />
+                  {errors.name && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.name}</p>}
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="overline mb-2 block">Email</label>
-                    <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="john@company.com" className="l-input" />
+                    <label className={`overline mb-2 block ${errors.email ? 'text-red-500' : ''}`}>Email</label>
+                    <input 
+                      type="email" 
+                      name="email" 
+                      value={formData.email} 
+                      onChange={handleChange} 
+                      required 
+                      placeholder="john@company.com" 
+                      className={`l-input ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                    />
+                    {errors.email && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.email}</p>}
                   </div>
                   <div>
-                    <label className="overline mb-2 block">Phone</label>
-                    <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="(555) 000-0000" className="l-input" />
+                    <label className={`overline mb-2 block ${errors.phone ? 'text-red-500' : ''}`}>Phone</label>
+                    <input 
+                      type="tel" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleChange} 
+                      placeholder="(555) 000-0000" 
+                      className={`l-input ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                    />
+                    {errors.phone && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.phone}</p>}
                   </div>
                 </div>
                 <div>
-                  <label className="overline mb-2 block">Service Type</label>
-                  <select name="serviceType" value={formData.serviceType} onChange={handleChange} className="l-input">
+                  <label className={`overline mb-2 block ${errors.serviceType ? 'text-red-500' : ''}`}>Service Type</label>
+                  <select 
+                    name="serviceType" 
+                    value={formData.serviceType} 
+                    onChange={handleChange} 
+                    className={`l-input ${errors.serviceType ? 'border-red-500 focus:ring-red-500' : ''}`}
+                  >
                     <option value="">Select a survey type</option>
                     <option>ALTA Survey</option>
                     <option>Boundary Survey</option>
@@ -277,17 +347,19 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                     <option>Topographic Survey</option>
                     <option>Not sure — need guidance</option>
                   </select>
+                  {errors.serviceType && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.serviceType}</p>}
                 </div>
                 <div>
-                  <label className="overline mb-2 block">Message</label>
+                  <label className={`overline mb-2 block ${errors.message ? 'text-red-500' : ''}`}>Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     placeholder="Tell us about your property and project requirements..."
-                    className="l-input resize-none"
+                    className={`l-input resize-none ${errors.message ? 'border-red-500 focus:ring-red-500' : ''}`}
                   ></textarea>
+                  {errors.message && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.message}</p>}
                 </div>
                 <button
                   type="submit"

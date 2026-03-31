@@ -7,6 +7,60 @@ import Footer from '@/components/sections/Footer';
 import Swal from 'sweetalert2';
 import '@/styles/globals.css';
 
+const US_STATES = [
+  { code: 'AL', name: 'Alabama' },
+  { code: 'AK', name: 'Alaska' },
+  { code: 'AZ', name: 'Arizona' },
+  { code: 'AR', name: 'Arkansas' },
+  { code: 'CA', name: 'California' },
+  { code: 'CO', name: 'Colorado' },
+  { code: 'CT', name: 'Connecticut' },
+  { code: 'DE', name: 'Delaware' },
+  { code: 'DC', name: 'District Of Columbia' },
+  { code: 'FL', name: 'Florida' },
+  { code: 'GA', name: 'Georgia' },
+  { code: 'HI', name: 'Hawaii' },
+  { code: 'ID', name: 'Idaho' },
+  { code: 'IL', name: 'Illinois' },
+  { code: 'IN', name: 'Indiana' },
+  { code: 'IA', name: 'Iowa' },
+  { code: 'KS', name: 'Kansas' },
+  { code: 'KY', name: 'Kentucky' },
+  { code: 'LA', name: 'Louisiana' },
+  { code: 'ME', name: 'Maine' },
+  { code: 'MD', name: 'Maryland' },
+  { code: 'MA', name: 'Massachusetts' },
+  { code: 'MI', name: 'Michigan' },
+  { code: 'MN', name: 'Minnesota' },
+  { code: 'MS', name: 'Mississippi' },
+  { code: 'MO', name: 'Missouri' },
+  { code: 'MT', name: 'Montana' },
+  { code: 'NE', name: 'Nebraska' },
+  { code: 'NV', name: 'Nevada' },
+  { code: 'NH', name: 'New Hampshire' },
+  { code: 'NJ', name: 'New Jersey' },
+  { code: 'NM', name: 'New Mexico' },
+  { code: 'NY', name: 'New York' },
+  { code: 'NC', name: 'North Carolina' },
+  { code: 'ND', name: 'North Dakota' },
+  { code: 'OH', name: 'Ohio' },
+  { code: 'OK', name: 'Oklahoma' },
+  { code: 'OR', name: 'Oregon' },
+  { code: 'PA', name: 'Pennsylvania' },
+  { code: 'RI', name: 'Rhode Island' },
+  { code: 'SC', name: 'South Carolina' },
+  { code: 'SD', name: 'South Dakota' },
+  { code: 'TN', name: 'Tennessee' },
+  { code: 'TX', name: 'Texas' },
+  { code: 'UT', name: 'Utah' },
+  { code: 'VT', name: 'Vermont' },
+  { code: 'VA', name: 'Virginia' },
+  { code: 'WA', name: 'Washington' },
+  { code: 'WV', name: 'West Virginia' },
+  { code: 'WI', name: 'Wisconsin' },
+  { code: 'WY', name: 'Wyoming' }
+];
+
 const FormSection = ({ title, children }: { title: string; children: React.ReactNode }) => (
   <div className="mb-12 bg-white rounded-[2rem] p-8 lg:p-10 border border-[var(--border)] shadow-[0_16px_60px_rgba(0,79,128,0.1)]">
     <h3 className="font-display font-800 text-2xl mb-8 text-brand pb-4 border-b border-gray-50 flex items-center gap-3">
@@ -19,9 +73,9 @@ const FormSection = ({ title, children }: { title: string; children: React.React
   </div>
 );
 
-const InputField = ({ label, name, value, onChange, type = 'text', required = false, placeholder = '' }: any) => (
+const InputField = ({ label, name, value, onChange, type = 'text', required = false, placeholder = '', error }: any) => (
   <div className="space-y-1">
-    <label className="overline mb-2 block">
+    <label className={`overline mb-2 block ${error ? 'text-red-500' : ''}`}>
       {label} {required && <span className="text-red-500">*</span>}
     </label>
     <input
@@ -31,8 +85,48 @@ const InputField = ({ label, name, value, onChange, type = 'text', required = fa
       required={required}
       placeholder={placeholder}
       onChange={onChange}
-      className="l-input w-full"
+      className={`l-input w-full ${error ? 'border-red-500 focus:ring-red-500' : ''}`}
     />
+    {error && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider">{error}</p>}
+  </div>
+);
+
+const SelectField = ({ label, name, value, onChange, options, required = false, error }: any) => (
+  <div className="space-y-1">
+    <label className={`overline mb-2 block ${error ? 'text-red-500' : ''}`}>
+      {label} {required && <span className="text-red-500">*</span>}
+    </label>
+    <select
+      name={name}
+      value={value}
+      onChange={onChange}
+      className={`l-input w-full ${error ? 'border-red-500 focus:ring-red-500' : ''}`}
+    >
+      <option value="">Select {label}</option>
+      {options.map((opt: any) => (
+        <option key={opt.code || opt} value={opt.code || opt}>
+          {opt.name || opt}
+        </option>
+      ))}
+    </select>
+    {error && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider">{error}</p>}
+  </div>
+);
+
+const TextareaField = ({ label, name, value, onChange, rows = 4, placeholder = '', error }: any) => (
+  <div className="space-y-1">
+    <label className={`overline mb-2 block ${error ? 'text-red-500' : ''}`}>
+      {label}
+    </label>
+    <textarea
+      name={name}
+      value={value}
+      onChange={onChange}
+      rows={rows}
+      className={`l-input w-full resize-none ${error ? 'border-red-500 focus:ring-red-500' : ''}`}
+      placeholder={placeholder}
+    ></textarea>
+    {error && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider">{error}</p>}
   </div>
 );
 
@@ -54,6 +148,7 @@ const CheckboxField = ({ label, name, checked, onChange }: any) => (
 
 export default function OrderPage() {
   const [loader, setLoader] = useState(false);
+  const [errors, setErrors] = useState<any>({});
   const [formData, setFormData] = useState<any>({
     // Requester Info
     name: '',
@@ -103,10 +198,51 @@ export default function OrderPage() {
     const { name, value, type } = e.target;
     const val = type === 'checkbox' ? (e.target as HTMLInputElement).checked : value;
     setFormData((prev: any) => ({ ...prev, [name]: val }));
+    
+    // Clear error when user types
+    if (errors[name]) {
+      setErrors((prev: any) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: any = {};
+    
+    // Requester Info
+    if (!formData.name.trim()) newErrors.name = 'Full name is required';
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email address is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    if (!formData.phone.trim()) newErrors.phone = 'Phone number is required';
+    
+    // Property Info
+    if (!formData.propAddress.trim()) newErrors.propAddress = 'Property address is required';
+    if (!formData.propCity.trim()) newErrors.propCity = 'City is required';
+    if (!formData.propState.trim()) newErrors.propState = 'State selection is required';
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation Error',
+        text: 'Please fill in all required fields correctly.',
+        confirmButtonColor: '#004F80',
+      });
+      return;
+    }
+
     setLoader(true);
 
     const payload = {
@@ -155,10 +291,10 @@ export default function OrderPage() {
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <form onSubmit={handleSubmit} className="reveal">
+        <form onSubmit={handleSubmit} className="reveal" noValidate>
           <FormSection title="Requester Information">
-            <InputField label="Your Name" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" />
-            <InputField label="Email Address" name="email" value={formData.email} onChange={handleChange} type="email" required placeholder="email@example.com" />
+            <InputField label="Your Name" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" error={errors.name} />
+            <InputField label="Email Address" name="email" value={formData.email} onChange={handleChange} type="email" required placeholder="email@example.com" error={errors.email} />
             <InputField label="Date Ordered" name="dateOrdered" value={formData.dateOrdered} onChange={handleChange} type="date" />
             <InputField label="Date Needed" name="dateNeeded" value={formData.dateNeeded} onChange={handleChange} type="date" />
 
@@ -176,49 +312,32 @@ export default function OrderPage() {
             </div>
 
             <InputField label="City" name="city" value={formData.city} onChange={handleChange} />
-            <div className="space-y-1">
-              <label className="overline mb-2 block">US State</label>
-              <select name="state" value={formData.state} onChange={handleChange} className="l-input w-full">
-                <option value="">Select State</option>
-                <option value="FL">Florida</option>
-                <option value="GA">Georgia</option>
-                <option value="AL">Alabama</option>
-              </select>
-            </div>
+            <SelectField label="State" name="state" value={formData.state} onChange={handleChange} options={US_STATES} error={errors.state} />
 
             <InputField label="Zip Code" name="zip" value={formData.zip} onChange={handleChange} />
             <InputField label="Requested By" name="requestedBy" value={formData.requestedBy} onChange={handleChange} />
-            <InputField label="Mobile Phone" name="phone" value={formData.phone} onChange={handleChange} placeholder="(XXX) XXX-XXXX" />
+            <InputField label="Mobile Phone" name="phone" value={formData.phone} onChange={handleChange} required placeholder="(XXX) XXX-XXXX" error={errors.phone} />
             <InputField label="Extension" name="extension" value={formData.extension} onChange={handleChange} />
           </FormSection>
 
           <FormSection title="Property Details">
             <div className="md:col-span-2">
-              <InputField label="Property Address" name="propAddress" value={formData.propAddress} onChange={handleChange} required />
+              <InputField label="Property Address" name="propAddress" value={formData.propAddress} onChange={handleChange} required error={errors.propAddress} />
             </div>
-            <InputField label="City" name="propCity" value={formData.propCity} onChange={handleChange} required />
-            <div className="space-y-1">
-              <label className="overline mb-2 block">US State</label>
-              <select name="propState" value={formData.propState} onChange={handleChange} className="l-input w-full">
-                <option value="">Select State</option>
-                <option value="FL">Florida</option>
-              </select>
-            </div>
+            <InputField label="City" name="propCity" value={formData.propCity} onChange={handleChange} required error={errors.propCity} />
+            <SelectField label="State" name="propState" value={formData.propState} onChange={handleChange} options={US_STATES} required error={errors.propState} />
             <InputField label="Property County" name="propCounty" value={formData.propCounty} onChange={handleChange} />
-            <InputField label="Zip Code" name="propZip" value={formData.propZip} onChange={handleChange} />
+            <InputField label="Zip Code" name="propZip" value={formData.propZip} onChange={handleChange} error={errors.propZip} />
 
             <div className="md:col-span-2">
-              <div className="space-y-1">
-                <label className="overline mb-2 block">Legal Description of Lot</label>
-                <textarea
-                  name="legalDescription"
-                  value={formData.legalDescription}
-                  onChange={handleChange}
-                  rows={4}
-                  className="l-input w-full resize-none"
-                  placeholder="Official legal description..."
-                ></textarea>
-              </div>
+              <TextareaField
+                label="Legal Description of Lot"
+                name="legalDescription"
+                value={formData.legalDescription}
+                onChange={handleChange}
+                placeholder="Official legal description..."
+                error={errors.legalDescription}
+              />
             </div>
 
             <InputField label="Block" name="block" value={formData.block} onChange={handleChange} />
@@ -245,17 +364,25 @@ export default function OrderPage() {
             </div>
 
             <div className="md:col-span-2">
-              <div className="space-y-1">
-                <label className="overline mb-2 block">Lot and Plot Instructions</label>
-                <textarea name="lotInstructions" value={formData.lotInstructions} onChange={handleChange} rows={3} className="l-input w-full resize-none"></textarea>
-              </div>
+              <TextareaField
+                label="Lot and Plot Instructions"
+                name="lotInstructions"
+                value={formData.lotInstructions}
+                onChange={handleChange}
+                rows={3}
+                error={errors.lotInstructions}
+              />
             </div>
 
             <div className="md:col-span-2">
-              <div className="space-y-1">
-                <label className="overline mb-2 block">Message / Special Instructions</label>
-                <textarea name="message" value={formData.message} onChange={handleChange} rows={4} className="l-input w-full resize-none"></textarea>
-              </div>
+              <TextareaField
+                label="Message / Special Instructions"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows={4}
+                error={errors.message}
+              />
             </div>
           </FormSection>
 
