@@ -110,7 +110,7 @@ export default function Hero() {
                                         <img
                                              src="/logo.png"
                                              alt="Clearview"
-                                             className={`h-[140px] w-[140px] object-contain transition sm:block hidden`}
+                                             className={`h-[140px] w-[140px] object-contain transition sm:block hidden`} loading="lazy"
                                         />
                                    </div>
 
@@ -161,7 +161,7 @@ export default function Hero() {
                                                   className="absolute inset-0 transition-all duration-700 ease-in-out"
                                                   style={{ opacity: current === i ? 1 : 0, transform: current === i ? 'scale(1)' : 'scale(1.04)', zIndex: current === i ? 2 : 1 }}
                                              >
-                                                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" />
+                                                  <img src={slide.img} alt={slide.label} className="w-full h-full object-cover" loading={i === 0 ? "eager" : "lazy"} fetchPriority={i === 0 ? "high" : "auto"} />
                                                   <div className="absolute inset-0" style={{ background: 'linear-gradient(to top,rgba(0,8,25,0.88) 0%,rgba(0,8,25,0.35) 45%,rgba(0,8,25,0.1) 100%)' }}></div>
                                                   <svg className="absolute inset-0 w-full h-full opacity-[0.07] pointer-events-none" viewBox="0 0 900 620" preserveAspectRatio="xMidYMid slice" fill="none">
                                                        <circle cx="450" cy="310" r="200" stroke="#00aaee" strokeWidth="1" />
@@ -231,7 +231,7 @@ export default function Hero() {
                                    <div className="flex gap-3 mt-4 justify-center">
                                         <div className="px-3.5 py-2 rounded-2xl flex items-center gap-2" style={{ background: 'rgba(0,79,128,0.09)', border: '1px solid rgba(0,79,128,0.22)', animation: 'glowLight 2.8s ease-in-out infinite' }}>
                                              <div className="w-5 h-5 flex items-center justify-center">
-                                                  <img src="/logo.png" alt="Clearview" className="w-full h-full object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(14%) sepia(80%) saturate(600%) hue-rotate(185deg) brightness(80%) contrast(115%)' }} />
+                                                  <img src="/logo.png" alt="Clearview" className="w-full h-full object-contain" style={{ filter: 'brightness(0) saturate(100%) invert(14%) sepia(80%) saturate(600%) hue-rotate(185deg) brightness(80%) contrast(115%)' }} loading="lazy" />
                                              </div>
                                              <span className="text-xs font-display font-700" style={{ color: '#004f80' }}>Licensed &amp; Certified</span>
                                         </div>

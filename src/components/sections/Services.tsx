@@ -84,6 +84,7 @@ export default function Services({
                       <img
                         src={service.img}
                         alt={service.title}
+                        loading="lazy"
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       />
                       <div className="img-ov-lite opacity-40"></div>
@@ -146,6 +147,7 @@ export default function Services({
                     <img
                       src={service.img}
                       alt={service.title}
+                      loading="lazy"
                       className="svc-img w-full h-full object-cover"
                     />
                     <div className="img-ov"></div>
@@ -229,6 +231,7 @@ export default function Services({
                 <img
                   src={selectedService.img}
                   alt={selectedService.title}
+                  loading="lazy"
                   className="w-full h-80 object-cover rounded-2xl mb-6"
                 />
 

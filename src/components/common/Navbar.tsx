@@ -50,7 +50,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3">
-            <img
+            <img loading="lazy"
               src="/logo.png"
               alt="Clearview"
               className={`h-16 w-16 object-contain transition ${scrolled ? 'logo-light' : 'logo-light'

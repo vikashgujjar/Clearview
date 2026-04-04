@@ -18,7 +18,7 @@ export default function Footer() {
               <img
                 src="/logo.png"
                 alt="Clearview"
-                className="w-12 h-12 object-contain logo-dark"
+                className="w-12 h-12 object-contain logo-dark" loading="lazy"
               />
               <div>
                 <p className="font-display font-800 text-white text-base leading-none">Clearview</p>

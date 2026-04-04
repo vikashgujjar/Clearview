@@ -267,7 +267,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                 background: 'var(--brand)',
               }}
             >
-              <img src="/logo.png" alt="Clearview" className="w-14 h-14 object-contain flex-shrink-0 logo-dark" />
+              <img src="/logo.png" alt="Clearview" className="w-14 h-14 object-contain flex-shrink-0 logo-dark" loading="lazy" />
               <div>
                 <p className="font-display font-700 text-white text-sm">Clearview Land Survey</p>
                 <p className="text-sky-200/70 text-xs mt-1 italic">"Intelligence Isn't Artificial."</p>

@@ -86,6 +86,7 @@ export default function FeatureStrip() {
                 <img
                   src={feature.img}
                   alt={feature.title}
+                  loading="lazy"
                   className="feat-img w-full h-full object-cover"
                 />
                 <div className="img-ov"></div>

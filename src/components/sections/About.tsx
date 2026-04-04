@@ -42,7 +42,7 @@ export default function About({
             </div>
             <div className="relative reveal" style={{ transitionDelay: '0.2s' }}>
               <div className="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl">
-                <img
+                <img loading="lazy"
                   src="/about_surveyor.png"
                   className="w-full h-full object-cover"
                   alt="Precision Surveying"
@@ -109,7 +109,7 @@ export default function About({
           <div className="grid md:grid-cols-2">
             {/* LEFT — Image Panel */}
             <div className="relative" style={{ minHeight: '480px' }}>
-              <img
+              <img loading="lazy"
                 src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&h=600&q=80"
                 alt="Professional Surveyor"
                 className="w-full h-full object-cover absolute inset-0"
@@ -124,7 +124,7 @@ export default function About({
 
               <div className="relative z-10 flex flex-col justify-between h-full p-10">
                 <div className="flex items-center gap-3">
-                  <img
+                  <img loading="lazy"
                     src="/logo.png"
                     alt="Clearview"
                     className="w-14 h-14 object-contain logo-dark"
