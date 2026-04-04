@@ -189,11 +189,11 @@ export default function Services({
       {/* Modal */}
       {activeModal && selectedService && (
         <div
-          className="modal-overlay"
+          className="modal-overlay fixed top-0 left-0 right-0 flex items-center justify-center bg-black/60 h-full w-full z-[9999]"
           onClick={() => setActiveModal(null)}
         >
           <div
-            className="modal-body"
+            className="modal-body bg-white rounded-3xl w-full max-h-[calc(100vh-40px)] overflow-y-auto max-w-2xl mx-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="p-6 sm:p-8">

@@ -49,7 +49,7 @@ export default function About({
                 />
               </div>
               <div className="absolute -bottom-8 -left-8 bg-brand p-8 rounded-3xl shadow-xl text-white max-w-[240px]">
-                <div className="text-4xl font-display font-800 mb-1">20+</div>
+                <div className="text-4xl font-display font-800 mb-1">35+</div>
                 <div className="text-xs uppercase tracking-widest font-600 opacity-80">Years of Field Expertise</div>
               </div>
             </div>

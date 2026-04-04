@@ -31,8 +31,8 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
   return (
     <main className="overflow-x-hidden bg-white">
       <Navbar />
-      <InternalHero 
-        title={service.title} 
+      <InternalHero
+        title={service.title}
         subtitle={service.tag}
         breadcrumb="Services"
       />
@@ -96,8 +96,8 @@ export default function ServiceDetailPage({ params }: { params: { id: string } }
             <div className="p-8 rounded-[2rem] bg-navy-dark text-white shadow-2xl sticky top-32">
               <span className="badge-light mb-6 block w-fit">Request a Quote</span>
               <h4 className="font-display font-800 text-2xl mb-6">Need a <span className="gt-sky-dark">{service.title}</span> for your project?</h4>
-              <p className="text-sky-100/70 text-sm mb-8">Ready to provide the precision data your project needs. We respond to all requests within 24 hours.</p>
-              
+              <p className="text-sky-100/70 text-sm mb-8">Ready to provide the precision data your project needs. We respond to all requests within 1 hour.</p>
+
               <Link href="/order" className="btn-brand w-full py-4 rounded-xl flex items-center justify-center gap-2 group">
                 Order Your Survey
                 <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -16,9 +16,9 @@ export default function WhyUsPage() {
   return (
     <main className="overflow-x-hidden">
       <Navbar />
-      <InternalHero 
-        title="Why Choose Clearview Land Survey?" 
-        subtitle="Accuracy isn't just a goal — it's our baseline. We provide the expertise and reliability your property projects deserve."
+      <InternalHero
+        title="Why Choose Clearview Land Survey?"
+        subtitle="Accuracy isn't just a goal — it's our baseline. We provide the expertise and reliability your projects deserve."
         breadcrumb="Why Choose Us"
       />
       <WhyUs hideHeader={true} variant="page" whiteBg={true} />

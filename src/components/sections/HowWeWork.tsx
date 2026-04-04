@@ -20,7 +20,7 @@ export default function HowWeWork() {
     {
       number: '02',
       title: 'We Contact You',
-      description: 'We confirm details and provide a transparent quote within 24 hours.',
+      description: 'We confirm details and provide a transparent quote within 1 hour.',
       icon: (
         <svg className="w-7 h-7 text-sky-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path

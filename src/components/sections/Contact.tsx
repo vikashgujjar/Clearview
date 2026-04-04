@@ -17,7 +17,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
+
     // Clear error when user types
     if (errors[name]) {
       setErrors((prev: any) => {
@@ -30,7 +30,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
 
   const validateForm = () => {
     const newErrors: any = {};
-    
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -47,7 +47,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
 
   const handleContactSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       Swal.fire({
         icon: 'error',
@@ -143,7 +143,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
             Request a <span className="gt-brand">Survey Quote</span>
           </h2>
           <p className="mt-4 text-base" style={{ color: 'var(--text-body)' }}>
-            Detailed, transparent quote — no vague estimates, ever. We respond within 1 hours.
+            Detailed, transparent quote — no vague estimates, ever. We respond within 1 hour.
           </p>
         </div>
 
@@ -219,7 +219,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   info@clearviewsurvey.com
                 </p>
                 <p className="text-xs mt-0.5" style={{ color: 'var(--text-muted)' }}>
-                  Response within 1 hours
+                  Response within 1 hour
                 </p>
               </div>
             </div>
@@ -292,50 +292,50 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
               <form onSubmit={handleContactSubmit} className="space-y-4" noValidate>
                 <div>
                   <label className={`overline mb-2 block ${errors.name ? 'text-red-500' : ''}`}>Name</label>
-                  <input 
-                    type="text" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    required 
-                    placeholder="Full Name" 
-                    className={`l-input ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Full Name"
+                    className={`l-input ${errors.name ? 'border-red-500 focus:ring-red-500' : ''}`}
                   />
                   {errors.name && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.name}</p>}
                 </div>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
                     <label className={`overline mb-2 block ${errors.email ? 'text-red-500' : ''}`}>Email</label>
-                    <input 
-                      type="email" 
-                      name="email" 
-                      value={formData.email} 
-                      onChange={handleChange} 
-                      required 
-                      placeholder="john@company.com" 
-                      className={`l-input ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="john@company.com"
+                      className={`l-input ${errors.email ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
                     {errors.email && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.email}</p>}
                   </div>
                   <div>
                     <label className={`overline mb-2 block ${errors.phone ? 'text-red-500' : ''}`}>Phone</label>
-                    <input 
-                      type="tel" 
-                      name="phone" 
-                      value={formData.phone} 
-                      onChange={handleChange} 
-                      placeholder="(555) 000-0000" 
-                      className={`l-input ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`} 
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      placeholder="(555) 000-0000"
+                      className={`l-input ${errors.phone ? 'border-red-500 focus:ring-red-500' : ''}`}
                     />
                     {errors.phone && <p className="text-[0.65rem] text-red-500 mt-1 uppercase font-700 tracking-wider font-display">{errors.phone}</p>}
                   </div>
                 </div>
                 <div>
                   <label className={`overline mb-2 block ${errors.serviceType ? 'text-red-500' : ''}`}>Service Type</label>
-                  <select 
-                    name="serviceType" 
-                    value={formData.serviceType} 
-                    onChange={handleChange} 
+                  <select
+                    name="serviceType"
+                    value={formData.serviceType}
+                    onChange={handleChange}
                     className={`l-input ${errors.serviceType ? 'border-red-500 focus:ring-red-500' : ''}`}
                   >
                     <option value="">Select a survey type</option>
@@ -378,7 +378,7 @@ export default function Contact({ whiteBg = false }: { whiteBg?: boolean }) {
                   )}
                 </button>
                 <p className="text-center text-xs" style={{ color: 'var(--text-muted)' }}>
-                  We respond within 1 hours with a detailed, transparent quote.
+                  We respond within 1 hour with a detailed, transparent quote.
                 </p>
               </form>
             </div>

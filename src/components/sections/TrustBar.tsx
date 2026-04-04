@@ -68,7 +68,7 @@ export default function TrustBar() {
                 />
               </svg>
             }
-            text="Response Within 1 Hours"
+            text="Response Within 1 Hour"
           />
         </div>
       </div>

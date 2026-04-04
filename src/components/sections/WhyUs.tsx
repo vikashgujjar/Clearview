@@ -76,7 +76,7 @@ const reasons = [
 ];
 
 const stats = [
-  { value: '40+', label: 'Years Experience' },
+  { value: '35+', label: 'Years Experience' },
   { value: '6', label: 'Survey Types' },
   { value: '100%', label: 'Licensed & Insured' },
   { value: 'Fast', label: 'Rush Available', isBrand: true },

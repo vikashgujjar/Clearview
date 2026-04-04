@@ -37,7 +37,7 @@ const slides = [
 ];
 
 /* Repeated enough times so the ticker fills any viewport width */
-const TICKER_TEXT = Array(10).fill('Artificial is Not Intelligence');
+const TICKER_TEXT = Array(10).fill('Intelligence is Not Artificial');
 
 export default function Hero() {
      const [current, setCurrent] = useState(0);
@@ -95,16 +95,24 @@ export default function Hero() {
                                         Licensed Professional Surveyors
                                    </div>
 
-                                   <h1
-                                        className="font-display  font-800 text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight animate-fadeUp"
-                                        style={{ animationDelay: '0.1s' }}
-                                   >
-                                        <span style={{ color: '#0a1628' }}>Artificial</span>
-                                        <br />
-                                        <span className="gt-brand">is Not</span>
-                                        <br />
-                                        <span style={{ color: '#1a3a5c' }}>Intelligence</span>
-                                   </h1>
+                                   <div className='flex items-center justify-between gap-4'>
+                                        <h1
+                                             className="font-display  font-800 text-5xl sm:text-6xl lg:text-7xl leading-[1.04] tracking-tight animate-fadeUp"
+                                             style={{ animationDelay: '0.1s' }}
+                                        >
+                                             <span style={{ color: '#0a1628' }}>Intelligence </span>
+                                             <br />
+                                             <span className="gt-brand">is Not</span>
+                                             <br />
+                                             <span style={{ color: '#1a3a5c' }}>Artificial</span>
+                                        </h1>
+
+                                        <img
+                                             src="/logo.png"
+                                             alt="Clearview"
+                                             className={`h-[140px] w-[140px] object-contain transition sm:block hidden`}
+                                        />
+                                   </div>
 
                                    <p className="text-lg leading-relaxed max-w-xl animate-fadeUp" style={{ color: '#2d4a63', animationDelay: '0.2s' }}>
                                         Clearview Land Survey delivers precision boundary surveys, ALTA reports, topographic mapping, and
@@ -128,7 +136,7 @@ export default function Hero() {
 
                                    <div className="flex flex-wrap gap-8 pt-4 animate-fadeUp" style={{ borderTop: '1px solid rgba(0,79,128,0.12)', animationDelay: '0.4s' }}>
                                         <div>
-                                             <div className="font-display font-800 text-3xl gt-brand">20+</div>
+                                             <div className="font-display font-800 text-3xl gt-brand">35+</div>
                                              <div className="text-xs uppercase tracking-wider mt-0.5" style={{ color: '#7a9ab5' }}>Years Experience</div>
                                         </div>
                                         <div className="w-px" style={{ background: 'rgba(0,79,128,0.15)' }}></div>
