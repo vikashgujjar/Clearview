@@ -1,29 +1,50 @@
-import type { Metadata } from 'next';
+'use client';
+
 import Navbar from '@/components/common/Navbar';
 import InternalHero from '@/components/sections/InternalHero';
 import Footer from '@/components/sections/Footer';
 import '@/styles/globals.css';
-
-export const metadata: Metadata = {
-  title: 'Unique Survey Sample | Clearview Land Survey',
-  description: 'Explore the utility and importance of survey documents for new homeowners even after purchase.',
-};
+import Image from 'next/image';
+import { FileText, Eye, Download } from 'lucide-react';
 
 export default function UniqueSurveySamplePage() {
+
   return (
     <main className="overflow-x-hidden">
       <Navbar />
-      <InternalHero 
-        title="Unique Survey Sample" 
+      <InternalHero
+        title="Unique Survey Sample"
         subtitle="Exploring the ongoing utility and importance of professional survey documents for new homeowners."
         breadcrumb="Survey Sample"
       />
+
+      {/* PDF Sample Trigger Section */}
+      <div className="max-w-7xl mx-auto px-4 text-center mt-[-100px]">
+        <a
+          href="/POINTOFINTEREST.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block group reveal"
+        >
+          <div className="relative p-4 rounded-[2.5rem] bg-brand/[0.1] border-2 border-dashed border-brand/20 group-hover:border-brand/40 group-hover:bg-brand/[0.05] transition-all duration-500 max-w-xs mx-auto">
+            <div className="w-20 h-20 bg-white p-3 text-white rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl shadow-brand/20 group-hover:scale-110 transition-transform duration-500">
+              {/* <FileText className="w-10 h-10" /> */}
+              <img loading="lazy"
+                src="/HoomeSurvey.png"
+                alt="Clearview" />
+            </div>
+            <h3 className="font-display font-800 text-lg text-navy-dark mb-2">Sample Points of Interest</h3>
+            <p className="text-xs text-gray-500 mb-0">Click to open the PDF marketing document sample in a new tab.</p>
+
+          </div>
+        </a>
+      </div>
 
       {/* Main Content Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 grid-bg-light opacity-30"></div>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          
+
           {/* Welcome Intro */}
           <div className="max-w-3xl mx-auto text-center mb-24 reveal">
             <span className="badge-light mb-6">Homeowner Experience</span>
@@ -31,7 +52,7 @@ export default function UniqueSurveySamplePage() {
               Welcome Them Home!
             </h2>
             <p className="text-xl leading-relaxed text-gray-600 italic">
-               &quot;Once homeowners have purchased a property, the utility of the marketing document shifts but remains crucial to their ongoing experience in the neighborhood.&quot;
+              &quot;Once homeowners have purchased a property, the utility of the marketing document shifts but remains crucial to their ongoing experience in the neighborhood.&quot;
             </p>
           </div>
 
@@ -68,8 +89,8 @@ export default function UniqueSurveySamplePage() {
                   icon: '🏥'
                 }
               ].map((item, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="p-8 rounded-[2rem] bg-white border border-blue-50 hover:border-blue-200 shadow-sm hover:shadow-xl transition-all duration-500 reveal group"
                   style={{ transitionDelay: `${i * 0.1}s` }}
                 >
@@ -114,8 +135,8 @@ export default function UniqueSurveySamplePage() {
                   num: '04'
                 }
               ].map((item, i) => (
-                <div 
-                  key={i} 
+                <div
+                  key={i}
                   className="feat-card p-6 reveal h-full flex flex-col"
                   style={{ transitionDelay: `${i * 0.1}s` }}
                 >

@@ -153,6 +153,9 @@ export default function OrderPage() {
     // Requester Info
     name: '',
     email: '',
+    personOrderingName: '',
+    personCompanyName: '',
+    personOrderingEmail: '',
     dateOrdered: '',
     dateNeeded: '',
     isRush: false,
@@ -295,6 +298,11 @@ export default function OrderPage() {
           <FormSection title="Requester Information">
             <InputField label="Your Name" name="name" value={formData.name} onChange={handleChange} required placeholder="Full Name" error={errors.name} />
             <InputField label="Email Address" name="email" value={formData.email} onChange={handleChange} type="email" required placeholder="email@example.com" error={errors.email} />
+            
+            <InputField label="Person Ordering Name" name="personOrderingName" value={formData.personOrderingName} onChange={handleChange} />
+            <InputField label="Person Company Name" name="personCompanyName" value={formData.personCompanyName} onChange={handleChange} />
+            <InputField label="Person Ordering Email" name="personOrderingEmail" value={formData.personOrderingEmail} onChange={handleChange} type="email" />
+
             <InputField label="Date Ordered" name="dateOrdered" value={formData.dateOrdered} onChange={handleChange} type="date" />
             <InputField label="Date Needed" name="dateNeeded" value={formData.dateNeeded} onChange={handleChange} type="date" />
 

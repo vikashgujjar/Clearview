@@ -549,3 +549,28 @@ h5 {
 .text-navy-dark {
   color: #0a1628;
 }
+
+/* ── TAB ANIMATIONS ── */
+.tab-content-active {
+  animation: tabFadeInSlide 0.6s ease-out forwards;
+}
+
+@keyframes tabFadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── UTILITIES ── */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

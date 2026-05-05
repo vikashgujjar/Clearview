@@ -53,7 +53,7 @@ export default function Navbar() {
             <img loading="lazy"
               src="/logo.png"
               alt="Clearview"
-              className={`h-16 w-16 object-contain transition ${scrolled ? 'logo-light' : 'logo-light'
+              className={`h-24 w-24 object-contain transition ${scrolled ? 'logo-light' : 'logo-light'
                 }`}
             />
             {/* <div className="hidden sm:block">

@@ -3,7 +3,6 @@ import Navbar from '@/components/common/Navbar';
 import InternalHero from '@/components/sections/InternalHero';
 import Contact from '@/components/sections/Contact';
 import Footer from '@/components/sections/Footer';
-import '@/styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Contact Clearview | Request a Survey Quote',
